@@ -5,65 +5,639 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Worn Well — Secondhand shoes & clothing, worth knowing about</title>
 <meta name="description" content="Honest writing on secondhand fashion — what's worth buying, what to watch for, and why it matters. Men's and women's pieces, hand-picked, linked straight to Vinted.">
-<link rel="stylesheet" href="style.css">
+<style>
+/* ===========================================================
+   WORN WELL — care-label design system
+   Canvas paper + stitched label typography
+   =========================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;800&family=Literata:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@500;600&display=swap');
+
+:root {
+  --canvas: #EDEAE1;
+  --canvas-raised: #F5F3EC;
+  --ink: #211F1B;
+  --ink-soft: #55524A;
+  --thread-navy: #2F4858;
+  --thread-red: #A13D3D;
+  --thread-olive: #5F6F52;
+  --line: #C9C4B4;
+
+  --display: 'Big Shoulders Display', sans-serif;
+  --body: 'Literata', serif;
+  --mono: 'IBM Plex Mono', monospace;
+}
+
+* { box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--canvas);
+  color: var(--ink);
+  font-family: var(--body);
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: var(--thread-navy); text-decoration-thickness: 1.5px; text-underline-offset: 3px; }
+a:hover { color: var(--thread-red); }
+
+img { max-width: 100%; display: block; }
+
+.wrap {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ---------- Stitched divider (signature motif) ---------- */
+.stitch {
+  border: none;
+  border-top: 2px dashed var(--line);
+  margin: 0;
+}
+
+.stitch-thick {
+  border: none;
+  border-top: 3px dashed var(--ink);
+  opacity: 0.15;
+}
+
+/* ---------- Header ---------- */
+.site-header {
+  padding: 20px 0 18px;
+  border-bottom: 3px dashed var(--ink);
+}
+
+.site-header .wrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.btn-shop {
+  font-family: var(--mono);
+  font-weight: 700;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 10px 14px;
+  border-radius: 2px;
+  text-decoration: none;
+  border: 2px solid var(--ink);
+  white-space: nowrap;
+}
+
+.btn-shop-men {
+  background: var(--ink);
+  color: var(--canvas);
+}
+.btn-shop-men:hover { background: var(--thread-navy); color: var(--canvas); border-color: var(--thread-navy); }
+
+.btn-shop-women {
+  background: transparent;
+  color: var(--ink);
+}
+.btn-shop-women:hover { color: var(--canvas); background: var(--thread-red); border-color: var(--thread-red); }
+
+.brand {
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: 28px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: var(--ink);
+  text-decoration: none;
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.brand .brand-mark {
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--thread-red);
+  border: 1.5px solid var(--thread-red);
+  padding: 2px 6px;
+  border-radius: 2px;
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+nav.site-nav { display: flex; gap: 22px; }
+nav.site-nav a {
+  font-family: var(--mono);
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--ink-soft);
+  text-decoration: none;
+}
+nav.site-nav a:hover { color: var(--thread-red); }
+
+.nav-toggle { display: none; }
+
+/* ---------- Hero ---------- */
+.hero {
+  padding: 64px 0 56px;
+  border-bottom: 3px dashed var(--ink);
+}
+
+.hero-label {
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--thread-olive);
+  display: inline-block;
+  margin-bottom: 18px;
+}
+
+.hero h1 {
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: clamp(40px, 7vw, 76px);
+  line-height: 0.98;
+  text-transform: uppercase;
+  margin: 0 0 20px;
+  letter-spacing: 0.2px;
+}
+
+.hero h1 em {
+  font-style: normal;
+  color: var(--thread-red);
+}
+
+.hero p.lede {
+  font-size: 19px;
+  max-width: 560px;
+  color: var(--ink-soft);
+  margin: 0 0 28px;
+}
+
+.hero-ctas { display: flex; gap: 14px; flex-wrap: wrap; }
+
+/* ---------- Buttons ---------- */
+.btn {
+  font-family: var(--mono);
+  font-weight: 600;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 13px 22px;
+  border-radius: 2px;
+  text-decoration: none;
+  display: inline-block;
+  border: 2px solid var(--ink);
+  transition: transform 0.12s ease;
+}
+.btn:hover { transform: translateY(-2px); }
+
+.btn-primary {
+  background: var(--thread-red);
+  border-color: var(--thread-red);
+  color: #F5F3EC;
+}
+.btn-primary:hover { color: #F5F3EC; background: #8C3232; }
+
+.btn-ghost {
+  background: transparent;
+  color: var(--ink);
+}
+.btn-ghost:hover { color: var(--ink); border-color: var(--thread-red); }
+
+/* ---------- Section headings ---------- */
+.section { padding: 56px 0; }
+.section + .section { border-top: 3px dashed var(--ink); }
+
+.section-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 20px;
+  margin-bottom: 32px;
+  flex-wrap: wrap;
+}
+
+.section-head h2 {
+  font-family: var(--display);
+  font-weight: 800;
+  text-transform: uppercase;
+  font-size: clamp(28px, 4vw, 40px);
+  margin: 0;
+}
+
+.section-head .section-tag {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--ink-soft);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+/* ---------- Care-label tag chips ---------- */
+.tag {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 3px 8px;
+  border: 1.5px solid currentColor;
+  border-radius: 2px;
+  display: inline-block;
+}
+.tag-navy { color: var(--thread-navy); }
+.tag-olive { color: var(--thread-olive); }
+.tag-red { color: var(--thread-red); }
+
+/* ---------- Article/dispatch cards ---------- */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+}
+
+.card {
+  background: var(--canvas-raised);
+  border: 2px solid var(--ink);
+  border-radius: 3px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  text-decoration: none;
+  color: var(--ink);
+}
+
+.card:hover { border-color: var(--thread-red); }
+.card:hover h3 { color: var(--thread-red); }
+
+.card .tags { display: flex; gap: 8px; flex-wrap: wrap; }
+
+.card h3 {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 24px;
+  text-transform: uppercase;
+  margin: 0;
+  line-height: 1.05;
+}
+
+.card p {
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: 15px;
+  flex-grow: 1;
+}
+
+.card .read-more {
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--thread-navy);
+}
+
+/* ---------- Item spotlight rows (from the rail) ---------- */
+.rail-item {
+  display: grid;
+  grid-template-columns: 140px 1fr auto;
+  gap: 22px;
+  align-items: center;
+  padding: 20px 0;
+  border-top: 2px dashed var(--line);
+}
+.rail-item:first-child { border-top: none; }
+
+.rail-photo {
+  width: 140px;
+  height: 140px;
+  background: var(--canvas-raised);
+  border: 2px solid var(--ink);
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--ink-soft);
+  text-align: center;
+  padding: 8px;
+  overflow: hidden;
+}
+.rail-photo img { width: 100%; height: 100%; object-fit: cover; }
+
+.rail-info h4 {
+  font-family: var(--display);
+  font-size: 22px;
+  text-transform: uppercase;
+  margin: 0 0 6px;
+  font-weight: 700;
+}
+
+.rail-info .label-stamp {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--ink-soft);
+  margin: 0 0 8px;
+}
+
+.rail-info p.blurb {
+  margin: 0;
+  font-size: 14.5px;
+  color: var(--ink-soft);
+  max-width: 46ch;
+}
+
+.rail-price {
+  text-align: right;
+  white-space: nowrap;
+}
+
+.rail-price .price {
+  font-family: var(--display);
+  font-size: 26px;
+  font-weight: 800;
+  display: block;
+  margin-bottom: 8px;
+}
+
+/* ---------- Trust strip ---------- */
+.trust-strip {
+  background: var(--ink);
+  color: var(--canvas);
+  padding: 44px 0;
+}
+
+.trust-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 28px;
+}
+
+.trust-item .stamp {
+  font-family: var(--mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #C9A227;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.trust-item p {
+  margin: 0;
+  font-size: 14.5px;
+  color: #D9D6CC;
+}
+
+/* ---------- Footer ---------- */
+.site-footer {
+  padding: 40px 0 50px;
+  border-top: 3px dashed var(--ink);
+}
+
+.footer-grid {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 24px;
+}
+
+.footer-links { display: flex; gap: 22px; flex-wrap: wrap; }
+.footer-links a {
+  font-family: var(--mono);
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+.footer-note {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--ink-soft);
+  margin-top: 24px;
+}
+
+/* ---------- Article page ---------- */
+.article-header {
+  padding: 48px 0 32px;
+  border-bottom: 3px dashed var(--ink);
+}
+
+.article-header .back-link {
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  text-decoration: none;
+  display: inline-block;
+  margin-bottom: 20px;
+}
+
+.article-header h1 {
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: clamp(34px, 6vw, 54px);
+  text-transform: uppercase;
+  line-height: 1.02;
+  margin: 0 0 16px;
+}
+
+.article-meta {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--ink-soft);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.article-body {
+  max-width: 640px;
+  padding: 40px 0;
+}
+
+.article-body p { margin: 0 0 20px; font-size: 18px; }
+.article-body h2 {
+  font-family: var(--display);
+  text-transform: uppercase;
+  font-size: 26px;
+  margin: 36px 0 16px;
+}
+
+.article-body ul { padding-left: 20px; margin: 0 0 20px; }
+.article-body li { margin-bottom: 8px; }
+
+.article-cta {
+  background: var(--canvas-raised);
+  border: 2px solid var(--ink);
+  border-radius: 3px;
+  padding: 28px;
+  margin: 36px 0;
+  text-align: center;
+}
+.article-cta p {
+  font-family: var(--mono);
+  font-size: 13px;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  margin-bottom: 16px;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 720px) {
+  nav.site-nav {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--canvas);
+    border-bottom: 3px dashed var(--ink);
+    flex-direction: column;
+    padding: 16px 24px;
+    gap: 16px;
+  }
+  nav.site-nav.open { display: flex; }
+  .site-header .wrap { position: relative; }
+  .nav-toggle {
+    display: inline-block;
+    font-family: var(--mono);
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    border: 2px solid var(--ink);
+    background: none;
+    padding: 8px 12px;
+    border-radius: 2px;
+    cursor: pointer;
+  }
+  .rail-item {
+    grid-template-columns: 90px 1fr;
+    column-gap: 14px;
+    align-items: flex-start;
+  }
+  .rail-photo {
+    width: 90px;
+    height: 90px;
+    font-size: 10px;
+  }
+  .rail-info { min-width: 0; }
+  .rail-info h4 { font-size: 18px; }
+  .rail-price { grid-column: 1 / -1; text-align: left; display: flex; align-items: center; gap: 12px; }
+  .rail-price .price { margin-bottom: 0; }
+
+  .header-actions {
+    width: 100%;
+    justify-content: space-between;
+    order: 3;
+  }
+  .header-actions .btn-shop {
+    flex: 1;
+    text-align: center;
+    padding: 12px 8px;
+  }
+  .brand { order: 1; }
+  .nav-toggle { order: 2; margin-left: auto; }
+}
+
+</style>
 </head>
 <body>
 
 <header class="site-header">
   <div class="wrap">
     <a href="index.html" class="brand">Worn Well <span class="brand-mark">est. 2026</span></a>
-    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">MENU</button>
-    <nav class="site-nav" id="siteNav">
-      <a href="#dispatches">Dispatches</a>
-      <a href="#rail">From the Rail</a>
-      <a href="#trust">How Buying Works</a>
+
+    <div class="header-actions">
       <!-- EDIT: swap in your real Vinted profile link -->
-      <a href="https://www.vinted.co.uk/member/YOUR-USERNAME" target="_blank" rel="noopener">Shop Men's →</a>
+      <a href="https://www.vinted.co.uk/member/YOUR-USERNAME" target="_blank" rel="noopener" class="btn-shop btn-shop-men">Shop Men's</a>
       <!-- EDIT: swap in your partner's Vinted profile link -->
-      <a href="https://www.vinted.co.uk/member/PARTNER-USERNAME" target="_blank" rel="noopener">Shop Women's →</a>
+      <a href="https://www.vinted.co.uk/member/PARTNER-USERNAME" target="_blank" rel="noopener" class="btn-shop btn-shop-women">Shop Women's</a>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">MENU</button>
+    </div>
+
+    <nav class="site-nav" id="siteNav">
+      <a href="#articles">Articles</a>
+      <a href="#rail">For Sale</a>
+      <a href="#trust">How Buying Works</a>
     </nav>
   </div>
 </header>
 
 <section class="hero">
   <div class="wrap">
-    <span class="hero-label">// Secondhand, done properly</span>
+    <span class="hero-label">// Buy secondhand, buy smart</span>
     <h1>Good clothes<br>don't need to<br>be <em>new.</em></h1>
-    <p class="lede">Straight talk on buying secondhand shoes and clothing — what's genuinely worth it, what to check before you buy, and the stories behind a few pieces we've worn ourselves. Everything here links straight through to Vinted.</p>
+    <p class="lede">Honest reviews on buying secondhand shoes and clothing — what's genuinely worth it, what to check before you buy, and the stories behind a few items. Every item's quality-checked and shipped within 24 hours of purchase. See what's listed on our Vinted.</p>
     <div class="hero-ctas">
       <a href="#rail" class="btn btn-primary">See what's for sale</a>
-      <a href="#dispatches" class="btn btn-ghost">Read the dispatches</a>
+      <a href="#articles" class="btn btn-ghost">Read the articles</a>
     </div>
   </div>
 </section>
 
-<section class="section" id="dispatches">
+<section class="section" id="articles">
   <div class="wrap">
     <div class="section-head">
-      <h2>Dispatches</h2>
-      <span class="section-tag">Reading — not shopping</span>
+      <h2>Articles</h2>
     </div>
     <div class="card-grid">
 
-      <a href="articles/are-used-clothes-worth-it.html" class="card">
+      <a href="articles/vinted-condition-guide.html" class="card">
         <div class="tags"><span class="tag tag-navy">Buying Guide</span></div>
-        <h3>Are used clothes actually worth it?</h3>
-        <p>The honest pros and cons — fabric quality, fit gambles, and where secondhand genuinely beats buying new.</p>
-        <span class="read-more">Read dispatch →</span>
+        <h3>What does "very good" actually mean on Vinted?</h3>
+        <p>Condition labels cause more buyer frustration than almost anything else on the platform. Here's what they're meant to mean, and how to protect yourself.</p>
+        <span class="read-more">Read more →</span>
+      </a>
+
+      <a href="articles/is-it-safe-secondhand-shoes.html" class="card">
+        <div class="tags"><span class="tag tag-navy">Buying Guide</span></div>
+        <h3>Is it safe to buy secondhand shoes?</h3>
+        <p>The real risks — hygiene, fit, what actually matters — backed by NHS guidance, not scare stories.</p>
+        <span class="read-more">Read more →</span>
+      </a>
+
+      <a href="articles/secondhand-sizing-guide.html" class="card">
+        <div class="tags"><span class="tag tag-navy">Buying Guide</span></div>
+        <h3>Why secondhand clothing never fits the label size</h3>
+        <p>Vintage and secondhand sizing rarely matches modern labels. Here's why, and how to buy the right fit without trying it on.</p>
+        <span class="read-more">Read more →</span>
       </a>
 
       <a href="articles/secondhand-and-the-planet.html" class="card">
         <div class="tags"><span class="tag tag-olive">The Planet</span></div>
-        <h3>Why secondhand actually helps</h3>
-        <p>What buying used really does, and doesn't do, for textile waste and overproduction — no guilt trip, just the facts.</p>
-        <span class="read-more">Read dispatch →</span>
+        <h3>Does buying secondhand actually help the planet?</h3>
+        <p>What the real UK data says about textile waste and overproduction — no guilt trip, just the facts.</p>
+        <span class="read-more">Read more →</span>
       </a>
 
       <a href="articles/shoe-history-spotlight.html" class="card">
         <div class="tags"><span class="tag tag-red">Object History</span></div>
         <h3>The story behind a pair we're selling</h3>
         <p>Every shoe has a design history worth knowing before you buy it — starting with one from our current stock.</p>
-        <span class="read-more">Read dispatch →</span>
+        <span class="read-more">Read more →</span>
       </a>
 
     </div>
@@ -73,8 +647,7 @@
 <section class="section" id="rail">
   <div class="wrap">
     <div class="section-head">
-      <h2>From the Rail</h2>
-      <span class="section-tag">Hand-picked, both closets</span>
+      <h2>For Sale</h2>
     </div>
 
     <!-- EDIT: duplicate a .rail-item block per item you want to feature. Keep it to 10-15 max. -->
@@ -157,6 +730,17 @@
   </div>
 </footer>
 
-<script src="script.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  var toggle = document.getElementById('navToggle');
+  var nav = document.getElementById('siteNav');
+  if (toggle && nav) {
+    toggle.addEventListener('click', function () {
+      nav.classList.toggle('open');
+    });
+  }
+});
+
+</script>
 </body>
 </html>
