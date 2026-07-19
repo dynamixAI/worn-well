@@ -71,7 +71,39 @@ img { max-width: 100%; display: block; }
   align-items: center;
   justify-content: space-between;
   gap: 16px;
+  flex-wrap: wrap;
 }
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.btn-shop {
+  font-family: var(--mono);
+  font-weight: 700;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 10px 14px;
+  border-radius: 2px;
+  text-decoration: none;
+  border: 2px solid var(--ink);
+  white-space: nowrap;
+}
+
+.btn-shop-men {
+  background: var(--ink);
+  color: var(--canvas);
+}
+.btn-shop-men:hover { background: var(--thread-navy); color: var(--canvas); border-color: var(--thread-navy); }
+
+.btn-shop-women {
+  background: transparent;
+  color: var(--ink);
+}
+.btn-shop-women:hover { color: var(--canvas); background: var(--thread-red); border-color: var(--thread-red); }
 
 .brand {
   font-family: var(--display);
@@ -495,7 +527,29 @@ nav.site-nav a:hover { color: var(--thread-red); }
   }
   .rail-item {
     grid-template-columns: 90px 1fr;
+    column-gap: 14px;
+    align-items: flex-start;
   }
+  .rail-photo {
+    width: 90px;
+    height: 90px;
+    font-size: 10px;
+  }
+  .rail-info { min-width: 0; }
+  .rail-info h4 { font-size: 18px; }
   .rail-price { grid-column: 1 / -1; text-align: left; display: flex; align-items: center; gap: 12px; }
   .rail-price .price { margin-bottom: 0; }
+
+  .header-actions {
+    width: 100%;
+    justify-content: space-between;
+    order: 3;
+  }
+  .header-actions .btn-shop {
+    flex: 1;
+    text-align: center;
+    padding: 12px 8px;
+  }
+  .brand { order: 1; }
+  .nav-toggle { order: 2; margin-left: auto; }
 }
